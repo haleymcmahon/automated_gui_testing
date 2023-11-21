@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>International Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .question {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .image-container {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Center the image within its container */
+            margin: 0 auto;
+        }
+
+        .options-container {
+            margin-bottom: 20px;
+        }
+
+        .option {
+            margin-bottom: 10px;
+        }
+
+        #page2, #page3 {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container" id="page1">
+    <div class="question">Page 1: Which country is famous for the Eiffel Tower?</div>
+    <div class="image-container">
+        <img src="https://cdn.pariscityvision.com/library/image/5144.jpg" alt="Eiffel Tower">
+    </div>
+    <div class="options-container">
+        <div class="option">
+            <input type="radio" name="q1" value="France"> France
+        </div>
+        <div class="option">
+            <input type="radio" name="q1" value="Germany"> Germany
+        </div>
+        <div class="option">
+            <input type="radio" name="q1" value="Italy"> Italy
+        </div>
+        <div class="option">
+            <input type="radio" name="q1" value="Brazil"> Brazil
+        </div>
+    </div>
+    <button onclick="nextPage('page2')">Next</button>
+</div>
+
+<div class="quiz-container" id="page2">
+    <div class="question">Page 2: Which country hosts the famous Carnival in Rio de Janeiro?</div>
+    <div class="image-container">
+        <img src="https://cdn.getyourguide.com/img/tour/63bf48d3d663c.jpeg/145.jpg" alt="Rio Carnival">
+    </div>
+    <div class="options-container">
+        <div class="option">
+            <input type="radio" name="q2" value="Brazil"> Brazil
+        </div>
+        <div class="option">
+            <input type="radio" name="q2" value="Mexico"> Mexico
+        </div>
+        <div class="option">
+            <input type="radio" name="q2" value="Italy"> Italy
+        </div>
+        <div class="option">
+            <input type="radio" name="q2" value="Japan"> Japan
+        </div>
+    </div>
+    <button onclick="nextPage('page3')">Next</button>
+</div>
+
+<div class="quiz-container" id="page3">
+    <div class="question">Page 3: Which country is known for its cherry blossoms in spring?</div>
+    <div class="image-container">
+        <img src="https://www.cathaypacific.com/content/dam/focal-point/cx/inspiration/2019/02/Hero-Cherry-Blossom-Asia.renditionimage.1700.1133.jpg" alt="Cherry Blossoms">
+    </div>
+    <div class="options-container">
+        <div class="option">
+            <input type="radio" name="q3" value="Japan"> Japan
+        </div>
+        <div class="option">
+            <input type="radio" name="q3" value="South Korea"> South Korea
+        </div>
+        <div class="option">
+            <input type="radio" name="q3" value="China"> China
+        </div>
+        <div class="option">
+            <input type="radio" name="q3" value="India"> India
+        </div>
+    </div>
+    <button onclick="showResults()">Submit</button>
+</div>
+
+<script>
+    function nextPage(pageId) {
+        document.getElementById('page1').style.display = 'none';
+        document.getElementById('page2').style.display = 'none';
+        document.getElementById('page3').style.display = 'none';
+        document.getElementById(pageId).style.display = 'block';
+    }
+
+    function showResults() {
+        // Collect selected options
+        var selectedOptions = [];
+        var questions = ['q1', 'q2', 'q3'];
+        for (var i = 0; i < questions.length; i++) {
+            var question = questions[i];
+            var selectedOption = document.querySelector('input[name="' + question + '"]:checked');
+            if (selectedOption) {
+                selectedOptions.push({ question: question, answer: selectedOption.value });
+            }
+        }
+
+        // Display results (for demonstration, show an alert)
+        var resultsMessage = 'Quiz Results:\n\n';
+        for (var i = 0; i < selectedOptions.length; i++) {
+            var result = selectedOptions[i];
+            resultsMessage += 'Question ' + (i + 1) + ': ' + result.answer + '\n';
+        }
+        alert(resultsMessage);
+    }
+</script>
+
+</body>
+</html>
